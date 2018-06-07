@@ -1,4 +1,5 @@
 import routerMiddlewareHandler, { history } from '../src/index';
+// import routerMiddlewareHandler, { history } from 'react-router-helper';
 
 // A easy jump
 // export function goDetail(id) {

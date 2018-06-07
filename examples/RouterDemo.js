@@ -1,6 +1,7 @@
 import React from "react";
 import { Router, Route, Link } from "react-router-dom";
 import { history } from '../src/index';
+// import { history } from 'react-router-helper';
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
