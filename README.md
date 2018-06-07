@@ -46,7 +46,7 @@ export class Foo extends Component {
 }
 ```
 
-### 引入简单中间价机制增强跳转的功能
+### 引入简单中间件机制增强跳转的功能
 
 登录验证
 
