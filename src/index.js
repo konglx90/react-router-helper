@@ -2,9 +2,7 @@ import history from './history';
 
 const defaultBeforeRouteMiddlewares = [];
 
-const defaultAfterRouteMiddlewares = [
-    function pv() { console.log('pv') },
-];
+const defaultAfterRouteMiddlewares = [];
 
 export const routeChange = to => history.push(to);
 
@@ -45,4 +43,5 @@ const routerMiddlewareHandler = (createPath, enhance) => (...arg) => {
     }, goOnFlag);
 };
 
+export { history };
 export default routerMiddlewareHandler;

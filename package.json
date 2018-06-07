@@ -2,19 +2,22 @@
   "name": "react-router-helper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "example": "parcel examples/index.html"
+    "example": "parcel examples/index.html",
+    "build": "rimraf lib && babel src --copy-files --source-maps --extensions .es6,.es,.jsx,.js --out-dir lib"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "parcel-bundler": "^1.8.1",
     "react": "^16.4.0",
-    "react-router-dom": "^4.3.1"
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
+    "rimraf": "^2.6.2"
   },
-  "dependencies": {
-    "react-dom": "^16.4.0"
-  }
+  "dependencies": {}
 }

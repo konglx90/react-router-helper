@@ -1,5 +1,4 @@
-import history from '../src/history';
-import routerMiddlewareHandler from '../src/index';
+import routerMiddlewareHandler, { history } from '../src/index';
 
 // A easy jump
 // export function goDetail(id) {
@@ -14,11 +13,14 @@ const loginRequired = (to, next = () => null) => {
         console.log('login');
         next();
     } else {
-        // goLogin();
+        goLogin();
         console.log('no login');
         next(false);
     }
 }
+
+// const createLoginPath = () => `/login`;
+export const goLogin = routerMiddlewareHandler(() => '/login');
 
 const createDetailPath = id => `/detail/${id}`;
 export const goDetail = routerMiddlewareHandler(createDetailPath, {

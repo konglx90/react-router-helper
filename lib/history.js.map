@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/history.js"],"names":[],"mappings":";;;;;;AAAA;;;;;;kBAEe,qC","file":"history.js","sourcesContent":["import createHistory from 'history/createBrowserHistory';\n\nexport default createHistory();\n"]}

@@ -47,3 +47,29 @@ export class Foo extends Component {
 ```
 
 ### 引入简单中间价机制增强跳转的功能
+
+登录验证
+
+```js
+import routerMiddlewareHandler from 'react-router-helper';
+
+// enhance
+const isLogin = () => true;
+const goLogin = routerMiddlewareHandler(() => '/login');
+const loginRequired = (to, next = () => null) => {
+    if (!isLogin()) {
+        console.log('login');
+        next();
+    } else {
+        goLogin();
+        console.log('no login');
+        next(false);
+    }
+}
+
+// use loginRequired
+const createDetailPath = id => `/detail/${id}`;
+export const goDetail = routerMiddlewareHandler(createDetailPath, {
+  before: loginRequired,
+})
+```
