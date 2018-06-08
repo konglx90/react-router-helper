@@ -72,4 +72,17 @@ const createDetailPath = id => `/detail/${id}`;
 export const goDetail = routerMiddlewareHandler(createDetailPath, {
   before: loginRequired,
 })
+
+```
+
+你还可以简化写法
+
+```js
+const loginRequired = (to, next = () => null) => {
+    if (!isLogin()) {
+        next();
+    } else {
+        next('/login');
+    }
+}
 ```
