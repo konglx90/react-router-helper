@@ -1,6 +1,7 @@
 import React from "react";
 import { Router, Route, Link } from "react-router-dom";
 import { history } from '../src/index';
+import { goDetail } from './router';
 // import { history } from 'react-router-helper';
 
 // Some folks find value in a centralized route config.
@@ -11,7 +12,7 @@ import { history } from '../src/index';
 // first our route components
 const Main = () => <h2>Main</h2>;
 
-const Sandwiches = () => <h2>Sandwiches</h2>;
+const Detail = () => <h2>Detail</h2>;
 
 const Login = () => (
   <div>
@@ -23,8 +24,8 @@ const Login = () => (
 // then our route config
 const routes = [
   {
-    path: "/sandwiches",
-    component: Sandwiches
+    path: "/detail",
+    component: Detail
   },
   {
     path: "/login",
@@ -52,7 +53,10 @@ const RouteConfigExample = () => (
           <Link to="/login">login</Link>
         </li>
         <li>
-          <Link to="/sandwiches">Sandwiches</Link>
+          <div onClick={() => goDetail(90)}>detail need login</div>
+        </li>
+        <li>
+          <Link to="/">back</Link>
         </li>
       </ul>
 

@@ -29,10 +29,12 @@ const routerMiddlewareHandler = (createPath, enhance) => (...arg) => {
     ];
     let goOnFlag = true;
     const next = (goOn) => {
-        if (goOn === false) {
-            goOnFlag = goOn;
+        // 如果传入字符串，直接跳转
+        if (Object.prototype.toString.call(goOn) === '[object String]') {
+            history.push(goOn);
+            goOnFlag = false;
         } else {
-            goOnFlag = true;
+            goOnFlag = goOn === false ? goOn : true;
         }
     };
     tasks.reduce((acc, cur) => {
