@@ -48,7 +48,7 @@ export class Foo extends Component {
 
 ### 引入简单中间件机制增强跳转的功能
 
-登录验证
+例: 登录验证
 
 ```js
 import routerMiddlewareHandler from 'react-router-helper';
@@ -57,12 +57,10 @@ import routerMiddlewareHandler from 'react-router-helper';
 const isLogin = () => true;
 const goLogin = routerMiddlewareHandler(() => '/login');
 const loginRequired = (to, next = () => null) => {
-    if (!isLogin()) {
-        console.log('login');
+    if (isLogin()) {
         next();
     } else {
         goLogin();
-        console.log('no login');
         next(false);
     }
 }
@@ -71,7 +69,9 @@ const loginRequired = (to, next = () => null) => {
 const createDetailPath = id => `/detail/${id}`;
 export const goDetail = routerMiddlewareHandler(createDetailPath, {
   before: loginRequired,
-})
+});
+
+// so you can use goDetail anywhere with login check
 
 ```
 
@@ -79,10 +79,47 @@ export const goDetail = routerMiddlewareHandler(createDetailPath, {
 
 ```js
 const loginRequired = (to, next = () => null) => {
-    if (!isLogin()) {
+    if (isLogin()) {
         next();
     } else {
         next('/login');
     }
 }
 ```
+
+```js
+/**
+ * 其实不是必要的, 可以用以下方式替代
+ * <Route
+ *  exact
+ *  path={`${url}/input/:rentUnitId`}
+ *  render={props => (
+ *      isHasCookie('sid') ? (
+ *          // berfore
+ *          <CommentInput {...props} apartmentId={apartmentId} />
+ *          // after
+ *      ) : (
+ *          <Redirect to={`${urlPrefix}/login`} />
+ *      )
+ *  )}
+ * />
+ */
+```
+
+例: 默认带着 search
+
+```js
+const withSearch = (to, next = () => null) => {
+    const search = window.location.search;
+    const newTo = `${to}${search}`;
+    next(newTo);
+}
+```
+
+### Example
+
+`npm run example`
+
+### Build
+
+`npm run build`

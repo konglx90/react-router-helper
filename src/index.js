@@ -12,8 +12,8 @@ const routerMiddlewareHandler = (createPath, enhance) => (...arg) => {
         before = [],
         after = [],
     } = enhance || {};
-    const locationSearch = window.location.search;
-    const url = `${createPath(...arg)}${locationSearch}`;
+    // const locationSearch = window.location.search;
+    let url = `${createPath(...arg)}`;
     const beforeTasks = Array.isArray(before)
         ? before
         : [before];
@@ -28,7 +28,11 @@ const routerMiddlewareHandler = (createPath, enhance) => (...arg) => {
         ...defaultAfterRouteMiddlewares,
     ];
     let goOnFlag = true;
-    const next = (goOn) => {
+    const next = (goOn, newUrl) => {
+        if (goOn === true && newUrl !== undefined) {
+            url = newUrl;
+        }
+
         // 如果传入字符串，直接跳转
         if (Object.prototype.toString.call(goOn) === '[object String]') {
             history.push(goOn);

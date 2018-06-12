@@ -20,14 +20,21 @@ const isLogin = () => true;
 // }
 
 const loginRequired = (to, next = () => null) => {
-    if (!isLogin()) {
+    if (isLogin()) {
         next();
     } else {
         next('/login');
     }
 }
 
+const withSearch = (to, next = () => null) => {
+    const search = window.location.search;
+    const newTo = `${to}${search}`;
+
+    next(true, newTo);
+}
+
 const createDetailPath = id => `/detail/${id}`;
 export const goDetail = routerMiddlewareHandler(createDetailPath, {
-  before: loginRequired,
+  before: [withSearch, loginRequired],
 })

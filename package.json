@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "parcel examples/index.html",
-    "build": "rimraf lib && babel src --copy-files --source-maps --extensions .es6,.es,.jsx,.js --out-dir lib"
+    "build": "rimraf lib && babel src --copy-files --extensions .es6,.es,.jsx,.js --out-dir lib"
   },
   "author": "",
   "license": "ISC",
