@@ -106,16 +106,6 @@ const loginRequired = (to, next = () => null) => {
  */
 ```
 
-例: 默认带着 search
-
-```js
-const withSearch = (to, next = () => null) => {
-    const search = window.location.search;
-    const newTo = `${to}${search}`;
-    next(newTo);
-}
-```
-
 ### Example
 
 `npm run example`

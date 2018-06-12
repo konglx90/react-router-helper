@@ -12,8 +12,8 @@ const routerMiddlewareHandler = (createPath, enhance) => (...arg) => {
         before = [],
         after = [],
     } = enhance || {};
-    // const locationSearch = window.location.search;
-    let url = `${createPath(...arg)}`;
+    const locationSearch = window.location.search;
+    let url = `${createPath(...arg)}${locationSearch}`;
     const beforeTasks = Array.isArray(before)
         ? before
         : [before];
