@@ -48,12 +48,24 @@ export class Foo extends Component {
 
 ### 引入简单中间件机制增强跳转的功能
 
+```js
+const goDetail = routerMiddlewareHandler(createDetailPath, {
+  before: loginRequired,
+  after: log,
+});
+
+// plural
+const goDetail = routerMiddlewareHandler(createDetailPath, {
+  before: [loginRequired, log],
+});
+```
+
 例: 登录验证
 
 ```js
 import routerMiddlewareHandler from 'react-router-helper';
 
-// enhance
+// login enhance
 const isLogin = () => true;
 const goLogin = routerMiddlewareHandler(() => '/login');
 const loginRequired = (to, next = () => null) => {
@@ -62,6 +74,16 @@ const loginRequired = (to, next = () => null) => {
     } else {
         goLogin();
         next(false);
+    }
+}
+
+// 你还可以简化写法
+// login enhance v2
+const loginRequired = (to, next = () => null) => {
+    if (isLogin()) {
+        next();
+    } else {
+        next('/login');
     }
 }
 
@@ -75,26 +97,14 @@ export const goDetail = routerMiddlewareHandler(createDetailPath, {
 
 ```
 
-你还可以简化写法
-
-```js
-const loginRequired = (to, next = () => null) => {
-    if (isLogin()) {
-        next();
-    } else {
-        next('/login');
-    }
-}
-```
-
 ```js
 /**
- * 其实不是必要的, 可以用以下方式替代
+ * 其实有时候不是必要的, 可以用以下方式替代
  * <Route
  *  exact
  *  path={`${url}/input/:rentUnitId`}
  *  render={props => (
- *      isHasCookie('sid') ? (
+ *      isLogin() ? (
  *          // berfore
  *          <CommentInput {...props} apartmentId={apartmentId} />
  *          // after
